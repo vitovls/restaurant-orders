@@ -9,6 +9,17 @@ class TrackOrders:
     def add_new_order(self, customer, order, day):
         self.orders.append({"customer": customer, "order": order, "day": day})
 
+    def get_days(self):
+        days = []
+        for order in self.orders:
+            days.append(order["day"])
+
+    def get_foods(self):
+        foods = []
+        for order in self.orders:
+            if order["order"] not in foods:
+                foods.append(order["order"])
+
     def get_most_ordered_dish_per_customer(self, customer):
         count = {}
         most_frequent = self.orders[0]
@@ -21,13 +32,9 @@ class TrackOrders:
                 if count[order["order"]] > count[most_frequent["order"]]:
                     most_frequent = order
         return most_frequent["order"]
-        
 
     def get_never_ordered_per_customer(self, customer):
-        foods = []
-        for order in self.orders:
-            if order["order"] not in foods:
-                foods.append(order["order"])
+        foods = self.get_foods()
         foods_never_ordered = set()
         for food in foods:
             count = 0
@@ -38,12 +45,8 @@ class TrackOrders:
                 foods_never_ordered.add(food)
         return foods_never_ordered
 
-
     def get_days_never_visited_per_customer(self, customer):
-        days = []
-        for order in self.orders:
-            if order["day"] not in days:
-                days.append(order["day"])
+        days = self.get_days()
         days_never_go_to_restaurant = set()
         for day in days:
             count = 0
@@ -55,9 +58,7 @@ class TrackOrders:
         return days_never_go_to_restaurant
 
     def get_busiest_day(self):
-        days = []
-        for order in self.orders:
-                days.append(order["day"])
+        days = self.get_days()
         days_busy = set()
         for day in days:
             count = 0
@@ -67,12 +68,9 @@ class TrackOrders:
             if count > len(days_busy):
                 days_busy = day
         return days_busy
-        
 
     def get_least_busy_day(self):
-        days = []
-        for order in self.orders:
-                days.append(order["day"])
+        days = self.get_days()
         days_busy = days[0]
         for day in days:
             count = 0
@@ -82,4 +80,3 @@ class TrackOrders:
             if count < len(days_busy):
                 days_busy = day
         return days_busy
-                
