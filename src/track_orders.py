@@ -13,12 +13,14 @@ class TrackOrders:
         days = []
         for order in self.orders:
             days.append(order["day"])
+        return days
 
     def get_foods(self):
         foods = []
         for order in self.orders:
             if order["order"] not in foods:
                 foods.append(order["order"])
+        return foods
 
     def get_most_ordered_dish_per_customer(self, customer):
         count = {}
