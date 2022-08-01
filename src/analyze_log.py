@@ -12,7 +12,8 @@ def get_csv(path):
             "day": row[2],
         })
     return orders
-        
+
+
 def most_requested_food_by_maria(orders):
     count = {}
     most_frequent = orders[0]
@@ -25,6 +26,7 @@ def most_requested_food_by_maria(orders):
             most_frequent = order
     return most_frequent["food"]
 
+
 def quantity_arnaldo_ordered_hamburgers(orders):
     count = 0
     for order in orders:
@@ -32,12 +34,14 @@ def quantity_arnaldo_ordered_hamburgers(orders):
             count += 1
     return count
 
+
 def list_foods(orders):
     foods = []
     for order in orders:
         if order["food"] not in foods:
             foods.append(order["food"])
     return foods
+
 
 def orders_joao_never_ordered(orders):
     foods = list_foods(orders)
@@ -50,6 +54,7 @@ def orders_joao_never_ordered(orders):
         if count == 0:
             foods_never_ordered.add(food)
     return foods_never_ordered
+
 
 def list_days(orders):
     days = []
@@ -71,6 +76,7 @@ def day_joao_never_go_to_restaurant(orders):
             days_never_go_to_restaurant.add(day)
     return days_never_go_to_restaurant
 
+
 def write_file(path_to_file):
     orders = get_csv(path_to_file)
     file = open("data/mkt_campaign.txt", "w")
@@ -79,6 +85,7 @@ def write_file(path_to_file):
     file.write(str(orders_joao_never_ordered(orders)) + "\n")
     file.write(str(day_joao_never_go_to_restaurant(orders)) + "\n")
     file.close()
+
 
 def analyze_log(path_to_file):
     file_extension = path_to_file.split(".")[1]
