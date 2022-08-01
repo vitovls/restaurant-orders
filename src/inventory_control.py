@@ -31,7 +31,12 @@ class InventoryControl:
         for ingredient in self.INGREDIENTS[order]:
             if self.to_buy[ingredient] < self.MINIMUM_INVENTORY[ingredient]:
                 self.to_buy[ingredient] += 1
-            self.orders.append({customer, order, day})
+                self.orders.append({"customer": customer, "order": order, "day": day})
+            else:
+                return False
 
     def get_quantities_to_buy(self):
         return self.to_buy
+
+    def get_available_dishes(self):
+        return self.INGREDIENTS.keys()
