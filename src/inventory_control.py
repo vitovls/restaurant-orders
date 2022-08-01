@@ -16,10 +16,22 @@ class InventoryControl:
     }
 
     def __init__(self):
-        pass
+        self.orders = []
+        self.ingredients_to_buy = {
+            'pao': 0,
+            'carne': 0,
+            'queijo': 0,
+            'molho': 0,
+            'presunto': 0,
+            'massa': 0,
+            'frango': 0,
+        }
 
     def add_new_order(self, customer, order, day):
-        pass
+        for ingredient in self.INGREDIENTS[order]:
+            if self.ingredients_to_buy[ingredient] < self.MINIMUM_INVENTORY[ingredient]:
+                self.ingredients_to_buy[ingredient] += 1
+            self.orders.append({"customer": customer, "order": order, "day": day})
 
     def get_quantities_to_buy(self):
-        pass
+        return self.ingredients_to_buy
